@@ -4,17 +4,19 @@
     <color name="white">#FFFFFFFF</color>
     
     <!-- Primary colors -->
-    <color name="primary">#64B5F6</color>
-    <color name="primary_dark">#42A5F5</color>
+    <color name="primary">#FF6200EE</color>
+    <color name="primary_dark">#FF3700B3</color>
     <color name="primary_light">#BBDEFB</color>
-    <color name="accent">#FF80AB</color>
+    <color name="accent">#FF03DAC5</color>
     
     <!-- Text colors -->
-    <color name="primary_text">#FFFFFF</color>
+    <color name="primary_text">#FFFFFFFF</color>
     <color name="secondary_text">#B3FFFFFF</color>
     
     <!-- Background and divider colors -->
-    <color name="background">#121212</color>
+    <color name="background">#FF121212</color>
     <color name="divider">#1F1F1F</color>
     <color name="card_background">#1E1E1E</color>
+    <color name="surface">#FF121212</color>
+    <color name="error">#FFCF6679</color>
 </resources> 

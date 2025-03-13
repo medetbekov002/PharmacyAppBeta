@@ -1,18 +1,29 @@
 package com.example.pharmacyapp.ui.settings
 
-import android.content.SharedPreferences
+import android.content.Context
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.example.pharmacyapp.MainActivity
+import com.example.pharmacyapp.R
 import com.example.pharmacyapp.databinding.FragmentSettingsBinding
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
+import java.util.Locale
 
 class SettingsFragment : Fragment() {
     private var _binding: FragmentSettingsBinding? = null
     private val binding get() = _binding!!
-    private lateinit var sharedPreferences: SharedPreferences
+    
+    private val viewModel: SettingsViewModel by viewModels {
+        SettingsViewModelFactory(requireActivity().getSharedPreferences("ThemePrefs", Context.MODE_PRIVATE))
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,66 +37,79 @@ class SettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Initialize SharedPreferences
-        sharedPreferences = requireActivity().getSharedPreferences("ThemePrefs", 0)
-        
-        // Set initial switch state
-        binding.themeSwitch.isChecked = sharedPreferences.getBoolean("isDarkTheme", false)
-
-        // Set up theme switch
-        binding.themeSwitch.setOnCheckedChangeListener { _, isChecked ->
-            (activity as? MainActivity)?.setDarkTheme(isChecked)
-        }
-
-        setupInfoButtons()
+        setupLanguageButton()
+        setupThemeSwitch()
+        setupButtons()
     }
 
-    private fun setupInfoButtons() {
+    private fun setupLanguageButton() {
+        val currentLocale = getCurrentLocale()
+        binding.languageButton.text = if (currentLocale == Locale("ru")) {
+            getString(R.string.language_russian)
+        } else {
+            getString(R.string.language_english)
+        }
+
+        binding.languageButton.setOnClickListener {
+            val newLocale = if (currentLocale == Locale("ru")) {
+                Locale("en")
+            } else {
+                Locale("ru")
+            }
+            setLocale(newLocale)
+        }
+    }
+
+    private fun setupThemeSwitch() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.isDarkTheme.collectLatest { isDark ->
+                binding.themeSwitch.isChecked = isDark
+            }
+        }
+
+        binding.themeSwitch.setOnCheckedChangeListener { _, isChecked ->
+            viewModel.setDarkTheme(isChecked)
+            (activity as? MainActivity)?.setDarkTheme(isChecked)
+        }
+    }
+
+    private fun setupButtons() {
         binding.aboutUsButton.setOnClickListener {
             showAboutUsDialog()
         }
 
         binding.contactUsButton.setOnClickListener {
-            showContactUsDialog()
+            showContactDialog()
         }
     }
 
     private fun showAboutUsDialog() {
-        val message = """
-            Pharmacy App is your trusted companion for managing your health and wellness needs.
-            
-            We provide:
-            • Easy access to medicines
-            • Special discounts and offers
-            • Secure payment options
-            • Purchase history tracking
-            
-            Version: 1.0.0
-        """.trimIndent()
-
-        androidx.appcompat.app.AlertDialog.Builder(requireContext())
-            .setTitle("About Us")
-            .setMessage(message)
+        AlertDialog.Builder(requireContext())
+            .setTitle(R.string.settings_about)
+            .setMessage(getString(R.string.about_us_message))
             .setPositiveButton("OK", null)
             .show()
     }
 
-    private fun showContactUsDialog() {
-        val message = """
-            Get in touch with us:
-            
-            Email: support@pharmacyapp.com
-            Phone: +1 (555) 123-4567
-            Address: 123 Health Street, Medical City
-            
-            We're here to help!
-        """.trimIndent()
-
-        androidx.appcompat.app.AlertDialog.Builder(requireContext())
-            .setTitle("Contact Us")
-            .setMessage(message)
+    private fun showContactDialog() {
+        AlertDialog.Builder(requireContext())
+            .setTitle(R.string.settings_contact)
+            .setMessage(getString(R.string.contact_message))
             .setPositiveButton("OK", null)
             .show()
+    }
+
+    private fun getCurrentLocale(): Locale {
+        return resources.configuration.locales[0]
+    }
+
+    private fun setLocale(locale: Locale) {
+        val config = Configuration(resources.configuration)
+        config.setLocale(locale)
+        resources.updateConfiguration(config, resources.displayMetrics)
+
+        // Recreate activity to apply changes
+        activity?.recreate()
     }
 
     override fun onDestroyView() {

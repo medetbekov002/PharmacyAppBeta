@@ -25,11 +25,6 @@
         android:label="History" />
 
     <fragment
-        android:id="@+id/navigation_cart"
-        android:name="com.example.pharmacyapp.ui.cart.CartFragment"
-        android:label="Cart" />
-
-    <fragment
         android:id="@+id/navigation_settings"
         android:name="com.example.pharmacyapp.ui.settings.SettingsFragment"
         android:label="Settings" />

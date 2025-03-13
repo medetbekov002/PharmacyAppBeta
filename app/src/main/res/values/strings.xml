@@ -1,3 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">PharmacyApp</string>
+    <string name="app_name">Pharmacy</string>
+    
+    <!-- Navigation -->
+    <string name="nav_home">Home</string>
+    <string name="nav_discounts">Discounts</string>
+    <string name="nav_payment">Payment</string>
+    <string name="nav_history">History</string>
+    <string name="nav_settings">Settings</string>
+    
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_language">Language</string>
+    <string name="settings_dark_theme">Dark Theme</string>
+    <string name="settings_about">About Us</string>
+    <string name="settings_contact">Contact Support</string>
+    
+    <!-- Language Options -->
+    <string name="language_english">English</string>
+    <string name="language_russian">Русский</string>
+    
+    <!-- About Us -->
+    <string name="about_us_message">Welcome to our Pharmacy App! We are dedicated to providing you with the best healthcare solutions. Our app offers a wide range of medicines, easy payment options, and convenient delivery services. We strive to make healthcare accessible to everyone.</string>
+    
+    <!-- Contact -->
+    <string name="contact_message">Need help? Contact us:\n\nEmail: support@pharmacyapp.com\nPhone: +1 (555) 123-4567\nAddress: 123 Healthcare Street, Medical City, MC 12345\n\nWe are available 24/7 to assist you with any questions or concerns.</string>
+    
+    <!-- Home -->
+    <string name="home_title">Home</string>
+    <string name="search_hint">Search medicines</string>
+    <string name="categories_title">Categories</string>
+    
+    <!-- Payment -->
+    <string name="payment_title">Payment</string>
+    <string name="balance_title">Available Balance</string>
+    <string name="last_updated">Last updated: %1$s</string>
+    <string name="payment_methods">Payment Methods</string>
+    <string name="credit_card">Credit Card</string>
+    <string name="qr_payment">QR Code Payment</string>
+    <string name="scan_qr">Scan</string>
+    <string name="recent_transactions">Recent Transactions</string>
+    
+    <!-- History -->
+    <string name="history_title">Purchase History</string>
+    <string name="history_subtitle">View your past purchases</string>
+    <string name="order_number">Order #%1$s</string>
+    <string name="purchased_on">Purchased on: %1$s</string>
+    <string name="details">Details</string>
+    
+    <!-- Discounts -->
+    <string name="discounts_title">Discounts</string>
+    <string name="discount_percent">-%1$d%%</string>
+    <string name="discount_valid_until">Valid until %1$s</string>
 </resources>

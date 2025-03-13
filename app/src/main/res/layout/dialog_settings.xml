@@ -9,11 +9,11 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:gravity="center"
         android:text="Settings"
         android:textSize="24sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:layout_marginBottom="16dp"/>
+        android:textStyle="bold" />
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
@@ -29,6 +29,7 @@
             android:padding="16dp">
 
             <TextView
+                android:textColor="@color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Theme"
@@ -37,6 +38,7 @@
 
             <com.google.android.material.switchmaterial.SwitchMaterial
                 android:id="@+id/theme_switch"
+                android:textColor="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Dark Mode"
@@ -58,6 +60,7 @@
             android:padding="16dp">
 
             <TextView
+                android:textColor="@color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="About Us"
@@ -65,6 +68,7 @@
                 android:textSize="16sp"/>
 
             <TextView
+                android:textColor="@color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Pharmacy App is your trusted partner in healthcare. We provide quality medicines and professional service."
@@ -93,6 +97,7 @@
             android:padding="16dp">
 
             <TextView
+                android:textColor="@color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Contact Us"
@@ -100,12 +105,14 @@
                 android:textSize="16sp"/>
 
             <TextView
+                android:textColor="@color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Email: support@pharmacyapp.com"
                 android:layout_marginTop="8dp"/>
 
             <TextView
+                android:textColor="@color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Phone: +1 234 567 8900"
