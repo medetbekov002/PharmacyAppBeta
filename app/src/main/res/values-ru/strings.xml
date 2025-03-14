@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Аптека</string>
+    <string name="app_name">PharmacyApp</string>
     
     <!-- Navigation -->
     <string name="nav_home">Главная</string>
@@ -36,6 +36,7 @@
     <string name="all_products">Все товары</string>
     <string name="add_to_cart">В корзину</string>
     <string name="product_price">%1$.2f₽</string>
+    <string name="add_to_cart_message">%s добавлен в корзину</string>
     
     <!-- Payment -->
     <string name="payment_title">Оплата</string>
@@ -51,6 +52,8 @@
     <string name="save_card">Сохранить карту</string>
     <string name="qr_payment">Оплата по QR-коду</string>
     <string name="scan_qr">Сканировать QR-код</string>
+    <string name="qr_code_description">Отсканируйте QR-код для оплаты</string>
+    <string name="qr_code_instructions">Откройте приложение вашего банка и отсканируйте этот QR-код.\nРеквизиты платежа будут заполнены автоматически.</string>
     <string name="payment_success">Оплата прошла успешно</string>
     <string name="payment_failed">Ошибка оплаты</string>
     <string name="try_again">Повторить</string>

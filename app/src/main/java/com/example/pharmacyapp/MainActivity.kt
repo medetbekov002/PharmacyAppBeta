@@ -11,7 +11,8 @@ import com.example.pharmacyapp.databinding.ActivityMainBinding
 import com.example.pharmacyapp.utils.LocaleManager
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
+    private var _binding: ActivityMainBinding? = null
+    private val binding get() = _binding!!
 
     override fun attachBaseContext(base: Context) {
         super.attachBaseContext(LocaleManager.setLocale(base))
@@ -19,10 +20,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Set up navigation
         val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
@@ -32,6 +32,11 @@ class MainActivity : AppCompatActivity() {
         val sharedPreferences = getSharedPreferences("ThemePrefs", MODE_PRIVATE)
         val isDarkTheme = sharedPreferences.getBoolean("isDarkTheme", false)
         setDarkTheme(isDarkTheme)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
     fun setDarkTheme(isDark: Boolean) {

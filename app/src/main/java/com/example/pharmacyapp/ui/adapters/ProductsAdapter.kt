@@ -1,4 +1,4 @@
-package com.example.pharmacyapp.ui.home
+package com.example.pharmacyapp.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,8 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.pharmacyapp.R
 import com.example.pharmacyapp.databinding.ItemProductBinding
 import com.example.pharmacyapp.model.Product
-import java.text.NumberFormat
-import java.util.Locale
 
 class ProductsAdapter(
     private val onProductClick: (Product) -> Unit
@@ -42,18 +40,14 @@ class ProductsAdapter(
         }
 
         fun bind(product: Product) {
-            val context = binding.root.context
-            val currentLocale = context.resources.configuration.locales[0]
-            val currencyFormat = NumberFormat.getCurrencyInstance(currentLocale)
-
-            with(binding) {
+            binding.apply {
                 productName.text = product.name
                 productDescription.text = product.description
-                productPrice.text = currencyFormat.format(product.price)
+                productPrice.text = itemView.context.getString(
+                    R.string.product_price,
+                    product.price
+                )
                 productCategory.text = product.category
-                
-                // Here you would load the image using your preferred image loading library
-                // Glide.with(context).load(product.imageUrl).into(productImage)
             }
         }
     }

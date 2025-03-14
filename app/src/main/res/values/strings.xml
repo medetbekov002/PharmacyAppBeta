@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Pharmacy</string>
+    <string name="app_name">PharmacyApp</string>
     
     <!-- Navigation -->
     <string name="nav_home">Home</string>
@@ -50,6 +50,8 @@
     <string name="save_card">Save Card</string>
     <string name="qr_payment">QR Code Payment</string>
     <string name="scan_qr">Scan QR Code</string>
+    <string name="qr_code_description">Scan this QR code to make a payment</string>
+    <string name="qr_code_instructions">Open your banking app and scan this QR code.\nThe payment details will be automatically filled in.</string>
     <string name="payment_success">Payment Successful</string>
     <string name="payment_failed">Payment Failed</string>
     <string name="try_again">Try Again</string>
@@ -149,4 +151,6 @@
     
     <string name="product_20_name">B-Complex Vitamins</string>
     <string name="product_20_desc">Energy and metabolism support</string>
+
+    <string name="add_to_cart_message">Added %s to cart</string>
 </resources>

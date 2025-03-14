@@ -1,10 +1,10 @@
 package com.example.pharmacyapp.model
 
 data class Product(
-    val id: Int,
+    val id: String,
     val name: String,
     val description: String,
+    val category: String,
     val price: Double,
-    val imageUrl: String,
-    val category: String
+    val isPopular: Boolean = false
 ) 
