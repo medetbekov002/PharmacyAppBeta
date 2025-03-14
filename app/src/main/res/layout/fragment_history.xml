@@ -5,6 +5,7 @@
     android:layout_height="match_parent">
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/headerCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
@@ -21,7 +22,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Purchase History"
+                android:text="@string/history_title"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -29,7 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="View your past purchases" />
+                android:text="@string/history_subtitle" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 

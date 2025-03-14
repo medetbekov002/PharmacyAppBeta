@@ -11,6 +11,8 @@
     
     <!-- Settings -->
     <string name="settings_title">Settings</string>
+    <string name="settings_customize">Customize your app experience</string>
+    <string name="settings_info">Information</string>
     <string name="settings_language">Language</string>
     <string name="settings_dark_theme">Dark Theme</string>
     <string name="settings_about">About Us</string>
@@ -30,26 +32,121 @@
     <string name="home_title">Home</string>
     <string name="search_hint">Search medicines</string>
     <string name="categories_title">Categories</string>
+    <string name="popular_products">Popular Products</string>
+    <string name="all_products">All Products</string>
+    <string name="add_to_cart">Add to Cart</string>
+    <string name="product_price">%1$.2f₽</string>
     
     <!-- Payment -->
     <string name="payment_title">Payment</string>
+    <string name="payment_subtitle">Choose payment method</string>
     <string name="balance_title">Available Balance</string>
-    <string name="last_updated">Last updated: %1$s</string>
     <string name="payment_methods">Payment Methods</string>
     <string name="credit_card">Credit Card</string>
+    <string name="card_number">Card Number</string>
+    <string name="expiry_date">Expiry Date</string>
+    <string name="cvv">CVV</string>
+    <string name="card_holder">Card Holder Name</string>
+    <string name="save_card">Save Card</string>
     <string name="qr_payment">QR Code Payment</string>
-    <string name="scan_qr">Scan</string>
-    <string name="recent_transactions">Recent Transactions</string>
+    <string name="scan_qr">Scan QR Code</string>
+    <string name="payment_success">Payment Successful</string>
+    <string name="payment_failed">Payment Failed</string>
+    <string name="try_again">Try Again</string>
     
     <!-- History -->
     <string name="history_title">Purchase History</string>
     <string name="history_subtitle">View your past purchases</string>
     <string name="order_number">Order #%1$s</string>
-    <string name="purchased_on">Purchased on: %1$s</string>
+    <string name="purchased_on">Purchased on %1$s</string>
     <string name="details">Details</string>
     
     <!-- Discounts -->
-    <string name="discounts_title">Discounts</string>
-    <string name="discount_percent">-%1$d%%</string>
-    <string name="discount_valid_until">Valid until %1$s</string>
+    <string name="discounts_title">Special Offers</string>
+    <string name="discounts_subtitle">Find the best deals on medicines</string>
+    <string name="active_discounts">Active Discounts</string>
+    <string name="no_discounts">No active discounts available at the moment</string>
+    <string name="promo_code">Promo Code</string>
+    <string name="enter_promo">Enter your promo code</string>
+    <string name="apply_promo">Apply Promo Code</string>
+    <string name="invalid_promo">Invalid promo code</string>
+    <string name="discount_percent">%d%% OFF</string>
+    <string name="discount_valid_until">Valid until %s</string>
+    <string name="apply_discount">Apply Discount</string>
+    <string name="discount_applied">%d%% discount applied successfully</string>
+    
+    <!-- Sample Discounts -->
+    <string name="sample_discount_title_1">First Purchase Discount</string>
+    <string name="sample_discount_desc_1">Get 15% off on your first order</string>
+    <string name="sample_discount_title_2">Weekend Special</string>
+    <string name="sample_discount_desc_2">25% off on all wellness products</string>
+
+    <!-- Categories -->
+    <string name="category_painkillers">Pain Relief</string>
+    <string name="category_antibiotics">Antibiotics</string>
+    <string name="category_vitamins">Vitamins &amp; Supplements</string>
+    <string name="category_cold">Cold &amp; Flu</string>
+    <string name="category_allergy">Allergy Relief</string>
+    <string name="category_firstaid">First Aid</string>
+
+    <!-- Products -->
+    <string name="product_1_name">Ibuprofen 200mg</string>
+    <string name="product_1_desc">Pain relief and fever reduction</string>
+    
+    <string name="product_2_name">Paracetamol 500mg</string>
+    <string name="product_2_desc">Effective pain and fever relief</string>
+    
+    <string name="product_3_name">Aspirin 325mg</string>
+    <string name="product_3_desc">Pain relief and blood thinner</string>
+    
+    <string name="product_4_name">Amoxicillin 500mg</string>
+    <string name="product_4_desc">Broad-spectrum antibiotic</string>
+    
+    <string name="product_5_name">Vitamin C 1000mg</string>
+    <string name="product_5_desc">Immune system support</string>
+    
+    <string name="product_6_name">Vitamin D3 2000IU</string>
+    <string name="product_6_desc">Bone health and immunity</string>
+    
+    <string name="product_7_name">Multivitamin Complex</string>
+    <string name="product_7_desc">Daily essential nutrients</string>
+    
+    <string name="product_8_name">Cold &amp; Flu Relief</string>
+    <string name="product_8_desc">Complete cold and flu symptom relief</string>
+    
+    <string name="product_9_name">Nasal Spray</string>
+    <string name="product_9_desc">Fast congestion relief</string>
+    
+    <string name="product_10_name">Throat Lozenges</string>
+    <string name="product_10_desc">Soothes sore throat</string>
+    
+    <string name="product_11_name">Cetirizine 10mg</string>
+    <string name="product_11_desc">24-hour allergy relief</string>
+    
+    <string name="product_12_name">Loratadine 10mg</string>
+    <string name="product_12_desc">Non-drowsy allergy relief</string>
+    
+    <string name="product_13_name">First Aid Kit</string>
+    <string name="product_13_desc">Essential emergency supplies</string>
+    
+    <string name="product_14_name">Bandages Pack</string>
+    <string name="product_14_desc">Assorted sizes for wound care</string>
+    
+    <string name="product_15_name">Antiseptic Solution</string>
+    <string name="product_15_desc">Wound cleaning and disinfection</string>
+    
+    <string name="product_16_name">Omega-3 Fish Oil</string>
+    <string name="product_16_desc">Heart and brain health support</string>
+    
+    <string name="product_17_name">Magnesium 400mg</string>
+    <string name="product_17_desc">Muscle and nerve support</string>
+    
+    <string name="product_18_name">Zinc 50mg</string>
+    <string name="product_18_desc">Immune system booster</string>
+    
+    <string name="product_19_name">Probiotics Complex</string>
+    <string name="product_19_desc">Digestive health support</string>
+    
+    <string name="product_20_name">B-Complex Vitamins</string>
+    <string name="product_20_desc">Energy and metabolism support</string>
 </resources>

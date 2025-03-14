@@ -7,13 +7,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pharmacyapp.databinding.FragmentHistoryBinding
-import java.text.SimpleDateFormat
+import com.example.pharmacyapp.ui.history.Purchase
+import com.example.pharmacyapp.ui.history.PurchaseItem
 import java.util.Date
-import java.util.Locale
 
 class HistoryFragment : Fragment() {
     private var _binding: FragmentHistoryBinding? = null
     private val binding get() = _binding!!
+    private lateinit var adapter: PurchaseHistoryAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,49 +27,44 @@ class HistoryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupRecyclerView()
+        loadSampleData()
+    }
 
-        // Sample purchase history data
-        val purchases = listOf(
-            Purchase(
-                id = "1",
-                date = Date(),
-                items = listOf(
-                    PurchaseItem(
-                        name = "Paracetamol",
-                        quantity = 2,
-                        price = 5.99
-                    ),
-                    PurchaseItem(
-                        name = "Vitamin C",
-                        quantity = 1,
-                        price = 12.99
-                    )
-                ),
-                totalAmount = 24.97
-            )
-        )
-
+    private fun setupRecyclerView() {
+        adapter = PurchaseHistoryAdapter()
         binding.historyRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
-            adapter = PurchaseHistoryAdapter(purchases)
+            adapter = this@HistoryFragment.adapter
         }
+    }
+
+    private fun loadSampleData() {
+        val samplePurchases = listOf(
+            Purchase(
+                id = "1001",
+                date = Date(),
+                items = listOf(
+                    PurchaseItem("Аспирин", 2, 150.0),
+                    PurchaseItem("Витамин C", 1, 300.0)
+                ),
+                totalAmount = 600.0
+            ),
+            Purchase(
+                id = "1002",
+                date = Date(System.currentTimeMillis() - 86400000), // Yesterday
+                items = listOf(
+                    PurchaseItem("Бинт", 3, 50.0),
+                    PurchaseItem("Йод", 1, 120.0)
+                ),
+                totalAmount = 270.0
+            )
+        )
+        adapter.submitList(samplePurchases)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-}
-
-data class Purchase(
-    val id: String,
-    val date: Date,
-    val items: List<PurchaseItem>,
-    val totalAmount: Double
-)
-
-data class PurchaseItem(
-    val name: String,
-    val quantity: Int,
-    val price: Double
-) 
+} 

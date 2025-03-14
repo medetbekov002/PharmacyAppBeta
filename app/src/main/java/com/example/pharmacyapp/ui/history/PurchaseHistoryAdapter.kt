@@ -5,16 +5,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.pharmacyapp.R
 import com.example.pharmacyapp.databinding.ItemPurchaseHistoryBinding
+import com.example.pharmacyapp.ui.history.Purchase
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-class PurchaseHistoryAdapter(private val initialPurchases: List<Purchase> = emptyList()) : 
-    ListAdapter<Purchase, PurchaseHistoryAdapter.PurchaseViewHolder>(PurchaseDiffCallback()) {
-
-    init {
-        submitList(initialPurchases)
-    }
+class PurchaseHistoryAdapter : ListAdapter<Purchase, PurchaseHistoryAdapter.PurchaseViewHolder>(PurchaseDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PurchaseViewHolder {
         val binding = ItemPurchaseHistoryBinding.inflate(
@@ -33,17 +30,21 @@ class PurchaseHistoryAdapter(private val initialPurchases: List<Purchase> = empt
         private val binding: ItemPurchaseHistoryBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        private val dateFormat = SimpleDateFormat("MMM dd, yyyy HH:mm", Locale.getDefault())
-
         fun bind(purchase: Purchase) {
+            val context = binding.root.context
+            val locale = context.resources.configuration.locales[0]
+            val dateFormat = SimpleDateFormat("dd MMMM yyyy, HH:mm", locale)
+
             binding.apply {
-                dateText.text = dateFormat.format(purchase.date)
-                totalAmountText.text = "Total: $${String.format("%.2f", purchase.totalAmount)}"
+                orderNumberText.text = context.getString(R.string.order_number, purchase.id)
+                dateText.text = context.getString(R.string.purchased_on, dateFormat.format(purchase.date))
                 
                 val itemsText = purchase.items.joinToString("\n") { item ->
-                    "${item.name} x${item.quantity} - $${String.format("%.2f", item.price * item.quantity)}"
+                    "${item.name} x${item.quantity} - ${String.format(locale, "%.2f₽", item.price * item.quantity)}"
                 }
                 itemsListText.text = itemsText
+                
+                totalAmountText.text = String.format(locale, "%.2f₽", purchase.totalAmount)
             }
         }
     }

@@ -26,7 +26,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Settings"
+                    android:text="@string/settings_title"
                     android:textSize="24sp"
                     android:textStyle="bold" />
 
@@ -34,7 +34,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Customize your app experience" />
+                    android:text="@string/settings_customize" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
@@ -71,8 +71,7 @@
                     android:id="@+id/languageButton"
                     style="@style/Widget.MaterialComponents.Button.TextButton"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/language_english"/>
+                    android:layout_height="wrap_content"/>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
@@ -128,7 +127,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Information"
+                    android:text="@string/settings_info"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
@@ -138,14 +137,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="About Us" />
+                    android:text="@string/settings_about" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/contactUsButton"
                     style="@style/Widget.MaterialComponents.Button.TextButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Contact Us" />
+                    android:text="@string/settings_contact" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
     </LinearLayout>

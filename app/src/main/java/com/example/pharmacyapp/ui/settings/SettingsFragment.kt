@@ -1,7 +1,6 @@
 package com.example.pharmacyapp.ui.settings
 
 import android.content.Context
-import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,9 +12,9 @@ import androidx.lifecycle.lifecycleScope
 import com.example.pharmacyapp.MainActivity
 import com.example.pharmacyapp.R
 import com.example.pharmacyapp.databinding.FragmentSettingsBinding
+import com.example.pharmacyapp.utils.LocaleManager
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import java.util.Locale
 
 class SettingsFragment : Fragment() {
     private var _binding: FragmentSettingsBinding? = null
@@ -43,20 +42,16 @@ class SettingsFragment : Fragment() {
     }
 
     private fun setupLanguageButton() {
-        val currentLocale = getCurrentLocale()
-        binding.languageButton.text = if (currentLocale == Locale("ru")) {
+        val currentLanguage = LocaleManager.getLanguage(requireContext())
+        binding.languageButton.text = if (currentLanguage == "ru") {
             getString(R.string.language_russian)
         } else {
             getString(R.string.language_english)
         }
 
         binding.languageButton.setOnClickListener {
-            val newLocale = if (currentLocale == Locale("ru")) {
-                Locale("en")
-            } else {
-                Locale("ru")
-            }
-            setLocale(newLocale)
+            val newLanguage = if (currentLanguage == "ru") "en" else "ru"
+            (activity as? MainActivity)?.setNewLocale(newLanguage)
         }
     }
 
@@ -87,7 +82,7 @@ class SettingsFragment : Fragment() {
         AlertDialog.Builder(requireContext())
             .setTitle(R.string.settings_about)
             .setMessage(getString(R.string.about_us_message))
-            .setPositiveButton("OK", null)
+            .setPositiveButton(android.R.string.ok, null)
             .show()
     }
 
@@ -95,21 +90,8 @@ class SettingsFragment : Fragment() {
         AlertDialog.Builder(requireContext())
             .setTitle(R.string.settings_contact)
             .setMessage(getString(R.string.contact_message))
-            .setPositiveButton("OK", null)
+            .setPositiveButton(android.R.string.ok, null)
             .show()
-    }
-
-    private fun getCurrentLocale(): Locale {
-        return resources.configuration.locales[0]
-    }
-
-    private fun setLocale(locale: Locale) {
-        val config = Configuration(resources.configuration)
-        config.setLocale(locale)
-        resources.updateConfiguration(config, resources.displayMetrics)
-
-        // Recreate activity to apply changes
-        activity?.recreate()
     }
 
     override fun onDestroyView() {

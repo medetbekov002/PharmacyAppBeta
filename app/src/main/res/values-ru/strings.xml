@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Аптека</string>
+    
+    <!-- Navigation -->
+    <string name="nav_home">Главная</string>
+    <string name="nav_discounts">Скидки</string>
+    <string name="nav_payment">Оплата</string>
+    <string name="nav_history">История</string>
+    <string name="nav_settings">Настройки</string>
+    
+    <!-- Settings -->
+    <string name="settings_title">Настройки</string>
+    <string name="settings_customize">Настройте приложение под себя</string>
+    <string name="settings_info">Информация</string>
+    <string name="settings_language">Язык</string>
+    <string name="settings_dark_theme">Темная тема</string>
+    <string name="settings_about">О приложении</string>
+    <string name="settings_contact">Связаться с поддержкой</string>
+    
+    <!-- Language Options -->
+    <string name="language_english">English</string>
+    <string name="language_russian">Русский</string>
+    
+    <!-- About Us -->
+    <string name="about_us_message">Добро пожаловать в наше приложение Аптека! Мы стремимся предоставить вам лучшие решения в области здравоохранения. Наше приложение предлагает широкий ассортимент лекарств, удобные способы оплаты и сервис доставки. Мы делаем все возможное, чтобы сделать здравоохранение доступным для всех.</string>
+    
+    <!-- Contact -->
+    <string name="contact_message">Нужна помощь? Свяжитесь с нами:\n\nEmail: support@pharmacyapp.com\nТелефон: +7 (555) 123-4567\nАдрес: ул. Здоровья, 123, Медицинский город, МГ 12345\n\nМы доступны 24/7 для ответов на ваши вопросы и решения проблем.</string>
+    
+    <!-- Home -->
+    <string name="home_title">Главная</string>
+    <string name="search_hint">Поиск лекарств</string>
+    <string name="categories_title">Категории</string>
+    <string name="popular_products">Популярные товары</string>
+    <string name="all_products">Все товары</string>
+    <string name="add_to_cart">В корзину</string>
+    <string name="product_price">%1$.2f₽</string>
+    
+    <!-- Payment -->
+    <string name="payment_title">Оплата</string>
+    <string name="payment_subtitle">Выберите способ оплаты</string>
+    <string name="balance_title">Доступный баланс</string>
+    <string name="last_updated">Последнее обновление: %1$s</string>
+    <string name="payment_methods">Способы оплаты</string>
+    <string name="credit_card">Банковская карта</string>
+    <string name="card_number">Номер карты</string>
+    <string name="expiry_date">Срок действия</string>
+    <string name="cvv">CVV</string>
+    <string name="card_holder">Имя владельца</string>
+    <string name="save_card">Сохранить карту</string>
+    <string name="qr_payment">Оплата по QR-коду</string>
+    <string name="scan_qr">Сканировать QR-код</string>
+    <string name="payment_success">Оплата прошла успешно</string>
+    <string name="payment_failed">Ошибка оплаты</string>
+    <string name="try_again">Повторить</string>
+    
+    <!-- History -->
+    <string name="history_title">История покупок</string>
+    <string name="history_subtitle">Просмотр прошлых покупок</string>
+    <string name="order_number">Заказ #%1$s</string>
+    <string name="purchased_on">Куплено: %1$s</string>
+    <string name="details">Подробности</string>
+    
+    <!-- Discounts -->
+    <string name="discounts_title">Специальные предложения</string>
+    <string name="discounts_subtitle">Найдите лучшие цены на лекарства</string>
+    <string name="active_discounts">Активные скидки</string>
+    <string name="no_discounts">На данный момент активных скидок нет</string>
+    <string name="promo_code">Промокод</string>
+    <string name="enter_promo">Введите ваш промокод</string>
+    <string name="apply_promo">Применить промокод</string>
+    <string name="invalid_promo">Недействительный промокод</string>
+    <string name="discount_percent">Скидка %d%%</string>
+    <string name="discount_valid_until">Действует до %s</string>
+    <string name="apply_discount">Применить скидку</string>
+    <string name="discount_applied">Скидка %d%% успешно применена</string>
+    
+    <!-- Sample Discounts -->
+    <string name="sample_discount_title_1">Скидка на первую покупку</string>
+    <string name="sample_discount_desc_1">Получите скидку 15% на первый заказ</string>
+    <string name="sample_discount_title_2">Специальное предложение выходного дня</string>
+    <string name="sample_discount_desc_2">Скидка 25% на все товары для здоровья</string>
+    
+    <!-- Categories -->
+    <string name="category_painkillers">Обезболивающие</string>
+    <string name="category_antibiotics">Антибиотики</string>
+    <string name="category_vitamins">Витамины и добавки</string>
+    <string name="category_cold">Простуда и грипп</string>
+    <string name="category_allergy">От аллергии</string>
+    <string name="category_firstaid">Первая помощь</string>
+
+    <!-- Products -->
+    <string name="product_1_name">Ибупрофен 200мг</string>
+    <string name="product_1_desc">Обезболивающее и жаропонижающее</string>
+    
+    <string name="product_2_name">Парацетамол 500мг</string>
+    <string name="product_2_desc">Эффективное обезболивающее и жаропонижающее</string>
+    
+    <string name="product_3_name">Аспирин 325мг</string>
+    <string name="product_3_desc">Обезболивающее и разжижающее кровь</string>
+    
+    <string name="product_4_name">Амоксициллин 500мг</string>
+    <string name="product_4_desc">Антибиотик широкого спектра</string>
+    
+    <string name="product_5_name">Витамин C 1000мг</string>
+    <string name="product_5_desc">Поддержка иммунной системы</string>
+    
+    <string name="product_6_name">Витамин D3 2000МЕ</string>
+    <string name="product_6_desc">Здоровье костей и иммунитет</string>
+    
+    <string name="product_7_name">Мультивитаминный комплекс</string>
+    <string name="product_7_desc">Ежедневные необходимые питательные вещества</string>
+    
+    <string name="product_8_name">Средство от простуды и гриппа</string>
+    <string name="product_8_desc">Комплексное облегчение симптомов простуды и гриппа</string>
+    
+    <string name="product_9_name">Назальный спрей</string>
+    <string name="product_9_desc">Быстрое устранение заложенности носа</string>
+    
+    <string name="product_10_name">Леденцы от боли в горле</string>
+    <string name="product_10_desc">Облегчает боль в горле</string>
+    
+    <string name="product_11_name">Цетиризин 10мг</string>
+    <string name="product_11_desc">24-часовое облегчение аллергии</string>
+    
+    <string name="product_12_name">Лоратадин 10мг</string>
+    <string name="product_12_desc">Противоаллергическое средство без сонливости</string>
+    
+    <string name="product_13_name">Аптечка первой помощи</string>
+    <string name="product_13_desc">Необходимые средства для экстренных случаев</string>
+    
+    <string name="product_14_name">Набор бинтов</string>
+    <string name="product_14_desc">Разные размеры для обработки ран</string>
+    
+    <string name="product_15_name">Антисептический раствор</string>
+    <string name="product_15_desc">Очищение и дезинфекция ран</string>
+    
+    <string name="product_16_name">Омега-3 рыбий жир</string>
+    <string name="product_16_desc">Поддержка здоровья сердца и мозга</string>
+    
+    <string name="product_17_name">Магний 400мг</string>
+    <string name="product_17_desc">Поддержка мышц и нервной системы</string>
+    
+    <string name="product_18_name">Цинк 50мг</string>
+    <string name="product_18_desc">Укрепление иммунной системы</string>
+    
+    <string name="product_19_name">Комплекс пробиотиков</string>
+    <string name="product_19_desc">Поддержка здоровья пищеварения</string>
+    
+    <string name="product_20_name">Витамины группы B</string>
+    <string name="product_20_desc">Поддержка энергии и метаболизма</string>
+</resources> 
