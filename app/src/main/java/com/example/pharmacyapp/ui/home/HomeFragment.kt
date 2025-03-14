@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.pharmacyapp.R
 import com.example.pharmacyapp.databinding.FragmentHomeBinding
 import com.example.pharmacyapp.model.Product
+import com.example.pharmacyapp.repository.PurchaseRepository
 import com.example.pharmacyapp.ui.adapters.ProductsAdapter
 import com.google.android.material.textfield.TextInputEditText
 
@@ -20,6 +21,7 @@ class HomeFragment : Fragment() {
     
     private lateinit var productsAdapter: ProductsAdapter
     private var allProducts = mutableListOf<Product>()
+    private val purchaseRepository = PurchaseRepository.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -228,6 +230,10 @@ class HomeFragment : Fragment() {
     }
 
     private fun handleProductClick(product: Product) {
+        // Save to purchase history
+        purchaseRepository.addPurchase(product)
+        
+        // Show toast message
         val message = getString(R.string.add_to_cart_message, product.name)
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }

@@ -5,16 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pharmacyapp.databinding.FragmentHistoryBinding
-import com.example.pharmacyapp.ui.history.Purchase
-import com.example.pharmacyapp.ui.history.PurchaseItem
-import java.util.Date
+import com.example.pharmacyapp.repository.PurchaseRepository
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 class HistoryFragment : Fragment() {
     private var _binding: FragmentHistoryBinding? = null
     private val binding get() = _binding!!
     private lateinit var adapter: PurchaseHistoryAdapter
+    private val purchaseRepository = PurchaseRepository.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,7 +30,7 @@ class HistoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
-        loadSampleData()
+        observePurchases()
     }
 
     private fun setupRecyclerView() {
@@ -39,28 +41,12 @@ class HistoryFragment : Fragment() {
         }
     }
 
-    private fun loadSampleData() {
-        val samplePurchases = listOf(
-            Purchase(
-                id = "1001",
-                date = Date(),
-                items = listOf(
-                    PurchaseItem("Аспирин", 2, 150.0),
-                    PurchaseItem("Витамин C", 1, 300.0)
-                ),
-                totalAmount = 600.0
-            ),
-            Purchase(
-                id = "1002",
-                date = Date(System.currentTimeMillis() - 86400000), // Yesterday
-                items = listOf(
-                    PurchaseItem("Бинт", 3, 50.0),
-                    PurchaseItem("Йод", 1, 120.0)
-                ),
-                totalAmount = 270.0
-            )
-        )
-        adapter.submitList(samplePurchases)
+    private fun observePurchases() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            purchaseRepository.purchases.collectLatest { purchases ->
+                adapter.submitList(purchases)
+            }
+        }
     }
 
     override fun onDestroyView() {
