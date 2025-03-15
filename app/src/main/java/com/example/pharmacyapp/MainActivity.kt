@@ -3,16 +3,21 @@ package com.example.pharmacyapp
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import com.example.pharmacyapp.data.UserPreferences
 import com.example.pharmacyapp.databinding.ActivityMainBinding
 import com.example.pharmacyapp.utils.LocaleManager
 
 class MainActivity : AppCompatActivity() {
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding!!
+    private lateinit var navController: NavController
+    private lateinit var userPreferences: UserPreferences
 
     override fun attachBaseContext(base: Context) {
         super.attachBaseContext(LocaleManager.setLocale(base))
@@ -22,11 +27,40 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        userPreferences = UserPreferences(this)
 
+        // Инициализация NavController
         val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        val navController = navHostFragment.navController
-        binding.bottomNavigation.setupWithNavController(navController)
+        navController = navHostFragment.navController
+
+        // Настраиваем нижнюю навигацию
+        binding.bottomNavigation?.setupWithNavController(navController)
+
+        // Скрываем/показываем нижнюю навигацию в зависимости от экрана
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.loginFragment, R.id.registerFragment, R.id.adminPanelFragment -> {
+                    binding.bottomNavigation?.visibility = View.GONE
+                }
+                else -> {
+                    if (!userPreferences.isAdmin()) {
+                        binding.bottomNavigation?.visibility = View.VISIBLE
+                    }
+                }
+            }
+        }
+
+        // Обработка нажатий в нижней навигации
+        binding.bottomNavigation?.setOnItemSelectedListener { menuItem ->
+            if (userPreferences.isAdmin()) {
+                navController.navigate(R.id.action_global_adminPanel)
+                false
+            } else {
+                navController.navigate(menuItem.itemId)
+                true
+            }
+        }
 
         // Set initial theme
         val sharedPreferences = getSharedPreferences("ThemePrefs", MODE_PRIVATE)

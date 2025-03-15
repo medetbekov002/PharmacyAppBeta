@@ -153,4 +153,26 @@
     <string name="product_20_desc">Energy and metabolism support</string>
 
     <string name="add_to_cart_message">Added %s to cart</string>
+
+    <string name="login_title">Вход</string>
+    <string name="register_title">Регистрация</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Пароль</string>
+    <string name="hint_confirm_password">Подтвердите пароль</string>
+    <string name="btn_login">Войти</string>
+    <string name="btn_register">Зарегистрироваться</string>
+    <string name="text_no_account">Нет аккаунта? Зарегистрируйтесь</string>
+    <string name="text_have_account">Уже есть аккаунт? Войдите</string>
+
+    <string name="profile_title">Профиль</string>
+    <string name="hint_first_name">Имя</string>
+    <string name="hint_last_name">Фамилия</string>
+    <string name="hint_phone">Номер телефона</string>
+    <string name="hint_birth_year">Год рождения</string>
+    <string name="btn_save">Сохранить</string>
+    <string name="btn_logout">Выйти</string>
+    <string name="profile_saved">Профиль успешно сохранен</string>
+
+    <string name="admin_panel_title">Панель администратора</string>
+    <string name="registered_users">Зарегистрированные пользователи</string>
 </resources>

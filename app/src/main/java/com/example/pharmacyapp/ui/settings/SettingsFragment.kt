@@ -9,8 +9,10 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.example.pharmacyapp.MainActivity
 import com.example.pharmacyapp.R
+import com.example.pharmacyapp.data.UserPreferences
 import com.example.pharmacyapp.databinding.FragmentSettingsBinding
 import com.example.pharmacyapp.utils.LocaleManager
 import kotlinx.coroutines.flow.collectLatest
@@ -19,6 +21,7 @@ import kotlinx.coroutines.launch
 class SettingsFragment : Fragment() {
     private var _binding: FragmentSettingsBinding? = null
     private val binding get() = _binding!!
+    private lateinit var userPreferences: UserPreferences
     
     private val viewModel: SettingsViewModel by viewModels {
         SettingsViewModelFactory(requireActivity().getSharedPreferences("ThemePrefs", Context.MODE_PRIVATE))
@@ -30,6 +33,7 @@ class SettingsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
+        userPreferences = UserPreferences(requireContext())
         return binding.root
     }
 
@@ -39,6 +43,26 @@ class SettingsFragment : Fragment() {
         setupLanguageButton()
         setupThemeSwitch()
         setupButtons()
+
+        // Добавляем обработчик для кнопки редактирования профиля
+        binding.profileButton.setOnClickListener {
+            findNavController().navigate(R.id.action_settings_to_profile)
+        }
+
+        // Добавляем обработчик для кнопки выхода
+        binding.logoutButton.setOnClickListener {
+            userPreferences.logout()
+            findNavController().navigate(R.id.action_settings_to_login)
+        }
+
+        // Добавляем обработчик для кнопки возврата на главную
+        binding.homeButton.setOnClickListener {
+            if (userPreferences.isAdmin()) {
+                findNavController().navigate(R.id.action_global_adminPanel)
+            } else {
+                findNavController().navigate(R.id.action_global_home)
+            }
+        }
     }
 
     private fun setupLanguageButton() {
