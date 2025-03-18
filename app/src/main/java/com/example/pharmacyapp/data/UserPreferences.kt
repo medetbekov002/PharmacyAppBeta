@@ -6,6 +6,7 @@ import com.example.pharmacyapp.data.model.Admin
 import com.example.pharmacyapp.data.model.User
 import com.example.pharmacyapp.data.model.Medicine
 import com.example.pharmacyapp.data.model.Discount
+import com.example.pharmacyapp.ui.history.Purchase
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
@@ -147,26 +148,21 @@ class UserPreferences(context: Context) {
     }
 
     // Методы для работы с лекарствами
-    fun saveMedicine(medicine: Medicine) {
-        val medicines = getMedicines().toMutableList()
-        medicines.add(medicine)
-        prefs.edit()
-            .putString(KEY_MEDICINES, gson.toJson(medicines))
-            .apply()
+    fun getMedicines(): List<Medicine> {
+        val medicinesJson = prefs.getString(KEY_MEDICINES, "[]")
+        val type = object : TypeToken<List<Medicine>>() {}.type
+        return gson.fromJson(medicinesJson, type)
     }
 
-    fun getMedicines(): List<Medicine> {
-        val json = prefs.getString(KEY_MEDICINES, null)
-        return if (json != null) {
-            try {
-                val type = object : TypeToken<List<Medicine>>() {}.type
-                gson.fromJson(json, type) ?: emptyList()
-            } catch (e: Exception) {
-                emptyList()
-            }
-        } else {
-            emptyList()
-        }
+    fun saveMedicines(medicines: List<Medicine>) {
+        val medicinesJson = gson.toJson(medicines)
+        prefs.edit().putString(KEY_MEDICINES, medicinesJson).apply()
+    }
+
+    fun addMedicine(medicine: Medicine) {
+        val medicines = getMedicines().toMutableList()
+        medicines.add(medicine)
+        saveMedicines(medicines)
     }
 
     fun updateMedicine(medicine: Medicine) {
@@ -174,18 +170,14 @@ class UserPreferences(context: Context) {
         val index = medicines.indexOfFirst { it.id == medicine.id }
         if (index != -1) {
             medicines[index] = medicine
-            prefs.edit()
-                .putString(KEY_MEDICINES, gson.toJson(medicines))
-                .apply()
+            saveMedicines(medicines)
         }
     }
 
     fun deleteMedicine(medicineId: String) {
         val medicines = getMedicines().toMutableList()
         medicines.removeAll { it.id == medicineId }
-        prefs.edit()
-            .putString(KEY_MEDICINES, gson.toJson(medicines))
-            .apply()
+        saveMedicines(medicines)
     }
 
     // Методы для работы со скидками
@@ -230,6 +222,18 @@ class UserPreferences(context: Context) {
             .apply()
     }
 
+    // Методы для работы с историей покупок
+    fun savePurchases(purchases: List<Purchase>) {
+        val purchasesJson = gson.toJson(purchases)
+        prefs.edit().putString(KEY_PURCHASES, purchasesJson).apply()
+    }
+
+    fun getPurchases(): List<Purchase> {
+        val purchasesJson = prefs.getString(KEY_PURCHASES, "[]")
+        val type = object : TypeToken<List<Purchase>>() {}.type
+        return gson.fromJson(purchasesJson, type)
+    }
+
     companion object {
         private const val PREFS_NAME = "pharmacy_app_prefs"
         private const val KEY_USER = "user"
@@ -239,5 +243,8 @@ class UserPreferences(context: Context) {
         private const val KEY_IS_ADMIN = "is_admin"
         private const val KEY_MEDICINES = "medicines"
         private const val KEY_DISCOUNTS = "discounts"
+        private const val KEY_PURCHASES = "purchases"
+        private const val KEY_ADMIN_EMAIL = "admin_email"
+        private const val KEY_ADMIN_PASSWORD = "admin_password"
     }
 } 

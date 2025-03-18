@@ -16,7 +16,7 @@ class HistoryFragment : Fragment() {
     private var _binding: FragmentHistoryBinding? = null
     private val binding get() = _binding!!
     private lateinit var adapter: PurchaseHistoryAdapter
-    private val purchaseRepository = PurchaseRepository.getInstance()
+    private lateinit var purchaseRepository: PurchaseRepository
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -24,6 +24,7 @@ class HistoryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHistoryBinding.inflate(inflater, container, false)
+        purchaseRepository = PurchaseRepository.getInstance(requireContext())
         return binding.root
     }
 

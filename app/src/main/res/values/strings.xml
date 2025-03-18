@@ -175,4 +175,18 @@
 
     <string name="admin_panel_title">Панель администратора</string>
     <string name="registered_users">Зарегистрированные пользователи</string>
+
+    <!-- Medicine Management -->
+    <string name="add_medicine">Добавление лекарства</string>
+    <string name="edit_medicine">Редактирование лекарства</string>
+    <string name="delete_medicine">Удаление лекарства</string>
+    <string name="delete_medicine_confirmation">Вы уверены, что хотите удалить %1$s?</string>
+    <string name="medicine_added">Лекарство добавлено</string>
+    <string name="medicine_updated">Лекарство обновлено</string>
+    <string name="medicine_deleted">Лекарство удалено</string>
+    <string name="fill_all_fields">Пожалуйста, заполните все поля</string>
+    <string name="add">Добавить</string>
+    <string name="save">Сохранить</string>
+    <string name="delete">Удалить</string>
+    <string name="cancel">Отмена</string>
 </resources>

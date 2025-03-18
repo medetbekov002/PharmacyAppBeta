@@ -5,13 +5,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.pharmacyapp.R
 import com.example.pharmacyapp.databinding.ItemProductBinding
-import com.example.pharmacyapp.model.Product
+import com.example.pharmacyapp.data.model.Medicine
 
 class ProductsAdapter(
-    private val onProductClick: (Product) -> Unit
-) : ListAdapter<Product, ProductsAdapter.ProductViewHolder>(ProductDiffCallback()) {
+    private val onProductClick: (Medicine) -> Unit
+) : ListAdapter<Medicine, ProductsAdapter.ProductViewHolder>(ProductDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         val binding = ItemProductBinding.inflate(
@@ -39,25 +40,28 @@ class ProductsAdapter(
             }
         }
 
-        fun bind(product: Product) {
+        fun bind(medicine: Medicine) {
             binding.apply {
-                productName.text = product.name
-                productDescription.text = product.description
-                productPrice.text = itemView.context.getString(
-                    R.string.product_price,
-                    product.price
-                )
-                productCategory.text = product.category
+                productName.text = medicine.name
+                productPrice.text = "${medicine.price} ₸"
+                productDescription.text = medicine.description
+
+                // Загрузка изображения с помощью Glide
+                Glide.with(productImage)
+                    .load(medicine.imageUrl)
+                    .placeholder(R.drawable.placeholder_product)
+                    .error(R.drawable.error_product)
+                    .into(productImage)
             }
         }
     }
 
-    private class ProductDiffCallback : DiffUtil.ItemCallback<Product>() {
-        override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
+    private class ProductDiffCallback : DiffUtil.ItemCallback<Medicine>() {
+        override fun areItemsTheSame(oldItem: Medicine, newItem: Medicine): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
+        override fun areContentsTheSame(oldItem: Medicine, newItem: Medicine): Boolean {
             return oldItem == newItem
         }
     }

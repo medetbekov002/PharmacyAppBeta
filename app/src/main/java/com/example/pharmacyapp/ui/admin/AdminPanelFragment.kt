@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pharmacyapp.R
 import com.example.pharmacyapp.data.UserPreferences
 import com.example.pharmacyapp.data.model.Medicine
@@ -95,7 +96,10 @@ class AdminPanelFragment : Fragment() {
                 showDeleteMedicineDialog(medicine)
             }
         )
-        binding.medicinesRecyclerView.adapter = medicinesAdapter
+        binding.medicinesRecyclerView.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = medicinesAdapter
+        }
     }
 
     private fun setupDiscountsRecyclerView() {
@@ -131,67 +135,41 @@ class AdminPanelFragment : Fragment() {
         selectedImageUri = null
 
         dialogBinding.selectImageButton.setOnClickListener {
-            val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-            getContent.launch(intent)
+            openImagePicker()
         }
         
         MaterialAlertDialogBuilder(requireContext())
-            .setTitle("Добавление лекарства")
+            .setTitle(R.string.add_medicine)
             .setView(dialogBinding.root)
-            .setPositiveButton("Добавить") { _, _ ->
+            .setPositiveButton(R.string.add) { dialog, _ ->
                 val name = dialogBinding.nameEditText.text.toString()
                 val description = dialogBinding.descriptionEditText.text.toString()
-                val priceText = dialogBinding.priceEditText.text.toString()
+                val price = dialogBinding.priceEditText.text.toString().toDoubleOrNull()
                 val category = dialogBinding.categoryEditText.text.toString()
-                val quantityText = dialogBinding.quantityEditText.text.toString()
+                val quantity = dialogBinding.quantityEditText.text.toString().toIntOrNull()
 
-                if (validateMedicineInput(name, description, priceText, category, quantityText)) {
-                    val medicine = Medicine(
-                        id = UUID.randomUUID().toString(),
-                        name = name,
-                        description = description,
-                        price = priceText.toDouble(),
-                        category = category,
-                        quantity = quantityText.toInt(),
-                        imageUrl = selectedImageUri?.toString()
-                    )
-                    userPreferences.saveMedicine(medicine)
-                    loadMedicines()
-                    Snackbar.make(binding.root, "Лекарство добавлено", Snackbar.LENGTH_SHORT).show()
+                if (name.isBlank() || description.isBlank() || price == null || category.isBlank() || quantity == null) {
+                    Snackbar.make(binding.root, R.string.fill_all_fields, Snackbar.LENGTH_SHORT).show()
+                    return@setPositiveButton
                 }
-            }
-            .setNegativeButton("Отмена", null)
-            .show()
-    }
 
-    private fun validateMedicineInput(
-        name: String,
-        description: String,
-        price: String,
-        category: String,
-        quantity: String
-    ): Boolean {
-        if (name.isBlank()) {
-            showError("Введите название лекарства")
-            return false
-        }
-        if (description.isBlank()) {
-            showError("Введите описание")
-            return false
-        }
-        if (price.isBlank() || price.toDoubleOrNull() == null || price.toDouble() <= 0) {
-            showError("Введите корректную цену")
-            return false
-        }
-        if (category.isBlank()) {
-            showError("Введите категорию")
-            return false
-        }
-        if (quantity.isBlank() || quantity.toIntOrNull() == null || quantity.toInt() < 0) {
-            showError("Введите корректное количество")
-            return false
-        }
-        return true
+                val medicine = Medicine(
+                    id = UUID.randomUUID().toString(),
+                    name = name,
+                    description = description,
+                    price = price,
+                    category = category,
+                    quantity = quantity,
+                    imageUrl = selectedImageUri?.toString() ?: ""
+                )
+
+                userPreferences.addMedicine(medicine)
+                loadMedicines()
+                Snackbar.make(binding.root, R.string.medicine_added, Snackbar.LENGTH_SHORT).show()
+                dialog.dismiss()
+            }
+            .setNegativeButton(R.string.cancel, null)
+            .show()
     }
 
     private fun showAddDiscountDialog() {
@@ -272,35 +250,39 @@ class AdminPanelFragment : Fragment() {
         }
 
         dialogBinding.selectImageButton.setOnClickListener {
-            val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-            getContent.launch(intent)
+            openImagePicker()
         }
 
         MaterialAlertDialogBuilder(requireContext())
-            .setTitle("Редактирование лекарства")
+            .setTitle(R.string.edit_medicine)
             .setView(dialogBinding.root)
-            .setPositiveButton("Сохранить") { _, _ ->
+            .setPositiveButton(R.string.save) { dialog, _ ->
                 val name = dialogBinding.nameEditText.text.toString()
                 val description = dialogBinding.descriptionEditText.text.toString()
-                val priceText = dialogBinding.priceEditText.text.toString()
+                val price = dialogBinding.priceEditText.text.toString().toDoubleOrNull()
                 val category = dialogBinding.categoryEditText.text.toString()
-                val quantityText = dialogBinding.quantityEditText.text.toString()
+                val quantity = dialogBinding.quantityEditText.text.toString().toIntOrNull()
 
-                if (validateMedicineInput(name, description, priceText, category, quantityText)) {
-                    val updatedMedicine = medicine.copy(
-                        name = name,
-                        description = description,
-                        price = priceText.toDouble(),
-                        category = category,
-                        quantity = quantityText.toInt(),
-                        imageUrl = selectedImageUri?.toString()
-                    )
-                    userPreferences.updateMedicine(updatedMedicine)
-                    loadMedicines()
-                    Snackbar.make(binding.root, "Лекарство обновлено", Snackbar.LENGTH_SHORT).show()
+                if (name.isBlank() || description.isBlank() || price == null || category.isBlank() || quantity == null) {
+                    Snackbar.make(binding.root, R.string.fill_all_fields, Snackbar.LENGTH_SHORT).show()
+                    return@setPositiveButton
                 }
+
+                val updatedMedicine = medicine.copy(
+                    name = name,
+                    description = description,
+                    price = price,
+                    category = category,
+                    quantity = quantity,
+                    imageUrl = selectedImageUri?.toString() ?: medicine.imageUrl
+                )
+
+                userPreferences.updateMedicine(updatedMedicine)
+                loadMedicines()
+                Snackbar.make(binding.root, R.string.medicine_updated, Snackbar.LENGTH_SHORT).show()
+                dialog.dismiss()
             }
-            .setNegativeButton("Отмена", null)
+            .setNegativeButton(R.string.cancel, null)
             .show()
     }
 
@@ -345,14 +327,14 @@ class AdminPanelFragment : Fragment() {
 
     private fun showDeleteMedicineDialog(medicine: Medicine) {
         MaterialAlertDialogBuilder(requireContext())
-            .setTitle("Удаление лекарства")
-            .setMessage("Вы уверены, что хотите удалить ${medicine.name}?")
-            .setPositiveButton("Удалить") { _, _ ->
+            .setTitle(R.string.delete_medicine)
+            .setMessage(getString(R.string.delete_medicine_confirmation, medicine.name))
+            .setPositiveButton(R.string.delete) { _, _ ->
                 userPreferences.deleteMedicine(medicine.id)
                 loadMedicines()
-                Snackbar.make(binding.root, "Лекарство удалено", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(binding.root, R.string.medicine_deleted, Snackbar.LENGTH_SHORT).show()
             }
-            .setNegativeButton("Отмена", null)
+            .setNegativeButton(R.string.cancel, null)
             .show()
     }
 
@@ -373,9 +355,25 @@ class AdminPanelFragment : Fragment() {
         Snackbar.make(binding.root, message, Snackbar.LENGTH_LONG).show()
     }
 
+    private fun openImagePicker() {
+        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        getContent.launch(intent)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_IMAGE_PICK && resultCode == Activity.RESULT_OK) {
+            selectedImageUri = data?.data
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         currentMedicineDialogBinding = null
         _binding = null
+    }
+
+    companion object {
+        private const val REQUEST_IMAGE_PICK = 1
     }
 } 
